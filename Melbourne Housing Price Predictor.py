@@ -83,3 +83,11 @@ bestmodelprediction = bestmodel.predict(val_x)
 
 print(mean_absolute_error(val_y, bestmodelprediction))
 
+
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_absolute_error
+
+forestpredict = RandomForestRegressor(random_state=1)
+forestpredict.fit(train_x, train_y)
+melbspredict = forestpredict.predict(val_x)
+mean_absolute_error(val_y, melbspredict)
