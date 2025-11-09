@@ -23,14 +23,22 @@ x_val.drop(cols_with_miss, axis=1, inplace = True)
 
 
 # "Cardinality" means the number of unique values in a column
+# Select categorical columns with relatively low cardinality (convenient but arbitrary)
+
 low_cardinality_cols = [cname for cname in x_train.columns if x_train[cname].nunique() < 10 and x_train[cname].dtype == "object"]
 print(low_cardinality_cols)
 
-# Select categorical columns with relatively low cardinality (convenient but arbitrary)
+# Select numerical columns
 
 numericalcol = [numcol for numcol in x_train.columns if x_train[numcol].dtype in ['int64', 'float64']]
 print(numericalcol)
 
-# Select numerical columns
 
 # Keep selected columns only
+
+mycols = low_cardinality_cols + numericalcol
+
+x_train_selected = x_train[mycols].copy
+x_val_selected = x_train[mycols].copy
+
+
